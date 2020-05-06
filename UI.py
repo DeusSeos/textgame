@@ -7,3 +7,5 @@ button.pack()
 
 root.title('')
 root.mainloop()
+
+# currently just working on the pulling from file

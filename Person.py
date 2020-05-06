@@ -5,6 +5,7 @@ class Person():
         self.health = 20.0
         self.attack = 5
         self.defense = 3
+        self.inventory = []
 
     def getName(self):
         return self.name

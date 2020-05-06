@@ -1,0 +1,4 @@
+Location:
+Welcome Message:
+Objects:
+Connecting Locations:
