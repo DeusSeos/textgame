@@ -1,8 +1,26 @@
-file = open('Location.txt', 'r')
+
 
 class Location():
     def __init__(self, location, welcomeMessage, objects, connectingLocations):
-        self.location = location # has to be a string
-        self.welcomeMessage = welcomeMessage # has to be a string
-        self.objects = objects # has to be a list
-        self.connectingLocations = connectingLocations # has to be a list
+        self.location = location
+        self.welcomeMessage = welcomeMessage
+        self.objects = objects
+        self.connectingLocations = connectingLocations
+
+    def getLocation(self):
+        return self.location
+
+    def getWelcomeMessage(self):
+        return self.welcomeMessage
+
+    def getObjects(self):
+        return self.objects
+
+    def getConnectingLocations(self):
+        return self.connectingLocations
+
+    def __str__(self):
+        return "{}||{}||{}||{}".format(self.location, self.welcomeMessage, self.objects, self.connectingLocations)
+
+
+
