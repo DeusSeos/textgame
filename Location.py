@@ -1,7 +1,7 @@
 
 
 class Location():
-    def __init__(self, locationName, welcomeMessage, objects, connectingLocations, mobs):
+    def __init__(self, locationName = '', welcomeMessage = '', objects = [], connectingLocations = [], mobs = []):
         self.location = locationName
         self.welcomeMessage = welcomeMessage
         self.objects = objects

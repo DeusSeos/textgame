@@ -1,0 +1,5 @@
+Name: Zombie
+Health: 20.0
+Attack: 1.0
+Defense: 1.0
+***

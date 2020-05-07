@@ -10,5 +10,3 @@ Objects: Dagger
 Connecting Locations: Troms
 Mobs: Zombie,Zombie
 ***
-
-
