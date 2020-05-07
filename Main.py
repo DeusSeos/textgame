@@ -39,11 +39,11 @@ def initalize(fileName = 'Location.txt'):
     i=0
 
     while i < locationTotal:
-        location = readDataList[index]
-        welcomeMessage = readDataList[index+1]
-        objects = readDataList[index+2].split(',')
-        connectingLocations = readDataList[index+3].split(',')
-        mobs = readDataList[index+4].split(',')
+        location = readDataList[index].strip()
+        welcomeMessage = readDataList[index+1].strip()
+        objects = readDataList[index+2].strip().split(',')
+        connectingLocations = readDataList[index+3].strip().split(',')
+        mobs = readDataList[index+4].strip().split(',')
         a = LocationExtractor.Location(location, welcomeMessage, objects, connectingLocations, mobs)
         locations.append(a)
         index += 6
