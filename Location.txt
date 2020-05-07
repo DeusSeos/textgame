@@ -1,4 +1,14 @@
-Location:
-Welcome Message:
-Objects:
-Connecting Locations:
+Location: Troms
+Welcome Message: Welcome to Troms
+Objects: Tea Bag
+Connecting Locations: Ragni
+Mobs: Shaman,Shaman
+***
+Location: Ragni
+Welcome Message: Welcome to the city
+Objects: Dagger
+Connecting Locations: Troms
+Mobs: Zombie,Zombie
+***
+
+
