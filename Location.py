@@ -23,6 +23,8 @@ class Location():
     def getMobs(self):
         return self.mobs
 
+
+
     def __str__(self):
         return "{}||{}||{}||{}||{}".format(self.location, self.welcomeMessage, self.objects, self.connectingLocations,self.mobs)
 

@@ -1,11 +1,16 @@
 # This is the driving code for creating the different objects
 # Special characters to indicate end of a section and end of a location
 # End of location: ***
+#
 
 import Location
 import Mob
 import Person
 import yaml
+
+locationArray = []
+personArray = []
+mobArray = []
 
 def initializeLocations(fileName = 'Location.txt'):
     wordsRemove = ['Location:', 'Welcome Message:', 'Objects:', 'Connecting Locations:', 'Mobs:']
@@ -135,13 +140,33 @@ def initializeMobs(fileName = 'Mob.txt'):
 
     return mobs
 
-locationArray = initializeLocations()
-personArray = initializePerson()
-mobArray = initializeMobs()
+def save(locationName = 'location.yaml', personName = 'person.yaml', mobName = 'mob.yaml'): #dumps all objects from the arrays into yaml files for save states
+    with open(locationName, 'w+') as locationYaml:
+        for element in locationArray:
+            yaml.dump(element, locationYaml)
+    with open(personName, 'w+') as personYaml:
+        for element in personArray:
+            yaml.dump(element, personYaml)
+    with open(mobName, 'w+') as mobYaml:
+        for element in mobArray:
+            yaml.dump(element, mobYaml)
 
-#with open('ree.yaml', 'w+') as ree:
-#    for element in locationArray:
-#        yaml.dump(element, ree)
+def load(locationName = 'location.yaml', personName = 'person.yaml', mobName = 'mob.yaml' ): #loads from yaml the objects into arrays
+    global locationArray
+    global personArray
+    global mobArray
+    with open(locationName) as locationYaml:
+        locationArray = load(locationYaml)
+    with open(personName) as personYaml:
+        personArray =load(personYaml)
+    with open(mobName) as mobYaml:
+        mobArray = load(mobYaml)
 
+def initializeGame():
 
-
+    global locationArray
+    global personArray
+    global mobArray
+    locationArray = initializeLocations()
+    personArray = initializePerson()
+    mobArray = initializeMobs()
