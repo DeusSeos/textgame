@@ -1,20 +1,20 @@
-!!python/object:Location.Location
-connectingLocations:
-- Ragni
-location: Troms
-mobs:
-- Shaman
-- Shaman
-objects:
-- Tea Bag
-welcomeMessage: Welcome to Troms
-!!python/object:Location.Location
-connectingLocations:
-- Troms
-location: Ragni
-mobs:
-- Zombie
-- Zombie
-objects:
-- Dagger
-welcomeMessage: Welcome to the city
+- !!python/object:Location.Location
+  connectingLocations:
+  - Ragni
+  location: Troms
+  mobs:
+  - Shaman
+  - Shaman
+  objects:
+  - Tea Bag
+  welcomeMessage: Welcome to Troms
+- !!python/object:Location.Location
+  connectingLocations:
+  - Troms
+  location: Ragni
+  mobs:
+  - Zombie
+  - Zombie
+  objects:
+  - Dagger
+  welcomeMessage: Welcome to the city

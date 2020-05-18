@@ -2,14 +2,14 @@
 
 class Location():
     def __init__(self, locationName = '', welcomeMessage = '', objects = [], connectingLocations = [], mobs = []):
-        self.location = locationName
+        self.locationName = locationName
         self.welcomeMessage = welcomeMessage
         self.objects = objects
         self.connectingLocations = connectingLocations
         self.mobs = mobs
 
     def getLocation(self):
-        return self.location
+        return self.locationName
 
     def getWelcomeMessage(self):
         return self.welcomeMessage
