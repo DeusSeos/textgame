@@ -146,38 +146,36 @@ def initializeMobs(fileName='Mob.txt'):
     return mobs
 
 
-def save(locationName='location.yaml', personName='person.yaml', mobName='mob.yaml'):  # dumps all objects from the arrays into yaml files for save states
+def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='SaveMob.txt'):  # dumps all objects from the arrays into yaml files for save states
     global locationArray
     global personArray
     global mobArray
     for location in locationArray:
-        name = location.locationName
-        message = location.welcomeMessage
-        obj = location.objects
-        connectLoc = location.connectingLocations
-        mobs = location.mobs
-        with open(locationName) as file:
-            file.write("Location: {} \n"  Welcome Message:\nObjects:\nConnecting Locations:\nMobs:\n***\n")
-
-
-
-
-
-
-
-def load(locationName='location.yaml', personName='person.yaml',mobName='mob.yaml'):  # loads from yaml the objects into arrays
-    global locationArray
-    global personArray
-    global mobArray
-    with open(locationName) as locationYaml:
-        # locationArray = yaml.load(locationYaml)
-        print(yaml.safe_load(locationYaml))
-    with open(personName) as personYaml:
-        # personArray = yaml.load(personYaml)
-        print(yaml.safe_load(personYaml))
-    with open(mobName) as mobYaml:
-        # mobArray = yaml.load(mobYaml)
-        print(yaml.safe_load(mobYaml))
+        name = location.getLocation()
+        message = location.getWelcomeMessage()
+        obj = ','.join(location.getObjects())
+        connectLoc = ','.join(location.getConnectingLocations())
+        mobs = ','.join(location.getMobs())
+        section = "Location: {} \n Welcome Message: {}\nObjects: {}\nConnecting Locations:{}\nMobs:{}\n***\n".format(name, message, obj, connectLoc, mobs)
+        with open(locationName, "w+") as file:
+            file.write(section)
+    for person in personArray:
+        name = person.getName()
+        health = person.getHealth()
+        attack = person.getAttack()
+        defense = person.getDefense()
+        inventory = ','.join(person.getInventory())
+        section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\n***\n".format(name, health, attack, defense, inventory)
+        with open(personName, "w+") as file:
+            file.write(section)
+    for mob in mobArray:
+        name = mob.getName()
+        health = mob.getHealth()
+        attack = mob.getAttack()
+        defense= mob.getDefense()
+        section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\n***\n".format(name, health, attack, defense)
+        with open(mobName, "w+") as file:
+            file.write(section)
 
 
 def initializeGame():
@@ -192,10 +190,78 @@ def initializeGame():
 initializeGame()
 save()
 waiting = input("Ready?: ")
-load()
+
 for element in locationArray:
     print(element)
 for element in personArray:
     print(element)
 for element in mobArray:
     print(element)
+
+
+
+#
+# def load(locationName='location.yaml', personName='person.yaml',
+#          mobName='mob.yaml'):  # loads from yaml the objects into arrays
+#     global locationArray
+#     global personArray
+#     global mobArray
+#     with open(locationName) as locationYaml:
+#         locationArray = yaml.load(locationYaml)
+#     print(yaml.safe_load(locationYaml))
+
+
+
+#######################
+# My PLAYGROUND
+#
+# class Location():
+#     def __init__(self, locationName = '', welcomeMessage = '', objects = [], connectingLocations = [], mobs = []):
+#         self.locationName = locationName
+#         self.welcomeMessage = welcomeMessage
+#         self.objects = objects
+#         self.connectingLocations = connectingLocations
+#         self.mobs = mobs
+#     def __repr__(self):
+#          return "%s:(welcomeMessage=%s, objects=%s, sp=%s)" % \
+#                 (self.locationName, self.welcomeMessage, 'a string','ree')
+#
+#
+# def yeetSave(locationName='location.yaml', personName='person.yaml', mobName='mob.yaml'):  # dumps all objects from the arrays into yaml files for save states
+#     global locationArray
+#     global personArray
+#     global mobArray
+#     with open(locationName,"w") as locationYaml:
+#         for element in locationArray:
+#             yaml.dump(element,locationYaml)
+#
+# # class Location:
+# #      def __init__(self, connectingLocations, locationName, mobs, objects, welcomeMessage):
+# #          self.connectingLocations = connectingLocations
+# #          self.locationName = locationName
+# #          self.mobs = mobs
+# #          self.objects = objects
+# #          self.welcomeMessage = welcomeMessage
+#
+#
+#
+#
+# def yeetLoad(locationName='location.yaml', personName='person.yaml', mobName='mob.yaml'):
+#     global locationArray
+#     global personArray
+#     global mobArray
+#
+#     with open('location.yaml') as locationYaml:
+#         # locationArray = yaml.load(locationYaml)
+#         dataMap = yaml.unsafe_load(locationYaml)
+#         print(dataMap)
+#     # with open(personName) as personYaml:
+#     #     # personArray = yaml.load(personYaml)
+#     #     print(yaml.unsafe_load(personYaml))
+#     # with open(mobName) as mobYaml:
+#     #     # mobArray = yaml.load(mobYaml)
+#     #     print(yaml.unsafe_load(mobYaml))
+#
+#
+#
+# #######################

@@ -1,0 +1,6 @@
+Location: Ragni 
+ Welcome Message: Welcome to the city
+Objects: Dagger
+Connecting Locations:Troms
+Mobs:Zombie,Zombie
+***
