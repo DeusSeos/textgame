@@ -1,32 +1,32 @@
-import tkinter as tk
+from tkinter import *
 from Backend import *
 
 
 class UI():
 
     def __init__(self):
-        self.window = tk.Tk()
+        self.window = Tk()
         self.window.title("Anima")
         self.window.geometry("720x900")
 
-        self.infoText = tk.StringVar()
+        self.infoText = StringVar()
         self.infoText.set("Welcome to the world of Anima")
 
 
-        # self.topFrame = Frame(self.window).pack()
-        # self.bottomFrame = Frame(self.window).pack(side='bottom')
+        self.topFrame = Frame(self.window).pack()
+        self.bottomFrame = Frame(self.window).pack(side='bottom')
 
-        self.infoBar = tk.Button(self.window, text= "Welcome to the world of Anima")
+        self.infoBar = Label(self.topFrame, text= "Welcome to the world of Anima")
 
-        self.SaveButton = tk.Button(self.window, text ='Save', command=save())
-        self.UpdateButton = tk.Button(self.window, text='Update', command= self.updateInfoBar)
+        self.SaveButton = Button(self.bottomFrame, text ='Save', command=save())
+        self.UpdateButton = Button(self.bottomFrame, text='Update', command= self.updateInfoBar)
         # self.Attack = Button()
         # self.Heal = Button()
         # self.PickUp = Button()
         # self.Interact = Button()
-
-        self.SaveButton.pack(side = tk.LEFT)
-        self.UpdateButton.pack(side = tk.RIGHT)
+        #
+        self.SaveButton.pack()
+        self.UpdateButton.pack()
         self.infoBar.pack()
 
         self.window.mainloop()
