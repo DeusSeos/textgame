@@ -149,31 +149,31 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
     global locationArray
     global personArray
     global mobArray
-    for location in locationArray:
-        name = location.getLocation()
-        message = location.getWelcomeMessage()
-        obj = ','.join(location.getObjects())
-        connectLoc = ','.join(location.getConnectingLocations())
-        mobs = ','.join(location.getMobs())
-        section = "Location: {}\nWelcome Message: {}\nObjects: {}\nConnecting Locations: {}\nMobs: {}\n***\n".format(name, message, obj, connectLoc, mobs)
-        with open(locationName, "a") as file:
+    with open(locationName, "a") as file:
+        for location in locationArray:
+            name = location.getLocation()
+            message = location.getWelcomeMessage()
+            obj = ','.join(location.getObjects())
+            connectLoc = ','.join(location.getConnectingLocations())
+            mobs = ','.join(location.getMobs())
+            section = "Location: {}\nWelcome Message: {}\nObjects: {}\nConnecting Locations: {}\nMobs: {}\n***\n".format(name, message, obj, connectLoc, mobs)
             file.write(section)
-    for person in personArray:
-        name = person.getName()
-        health = person.getHealth()
-        attack = person.getAttack()
-        defense = person.getDefense()
-        inventory = ','.join(person.getInventory())
-        section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\n***\n".format(name, health, attack, defense, inventory)
-        with open(personName, "a") as file:
+    with open(personName, "a") as file:
+        for person in personArray:
+            name = person.getName()
+            health = person.getHealth()
+            attack = person.getAttack()
+            defense = person.getDefense()
+            inventory = ','.join(person.getInventory())
+            section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\n***\n".format(name, health, attack, defense, inventory)
             file.write(section)
-    for mob in mobArray:
-        name = mob.getName()
-        health = mob.getHealth()
-        attack = mob.getAttack()
-        defense= mob.getDefense()
-        section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\n***\n".format(name, health, attack, defense)
-        with open(mobName, "a") as file:
+    with open(mobName, "a") as file:
+        for mob in mobArray:
+            name = mob.getName()
+            health = mob.getHealth()
+            attack = mob.getAttack()
+            defense= mob.getDefense()
+            section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\n***\n".format(name, health, attack, defense)
             file.write(section)
 
 def load():
@@ -194,7 +194,7 @@ def initializeGame():
 #
 # initializeGame()
 # save()
-# load()
+#load()
 # waiting = input("Ready?: ")
 #
 # for element in locationArray:
