@@ -6,7 +6,6 @@
 import Location
 import Mob
 import Person
-import yaml
 
 locationArray = []
 personArray = []
@@ -156,8 +155,8 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
         obj = ','.join(location.getObjects())
         connectLoc = ','.join(location.getConnectingLocations())
         mobs = ','.join(location.getMobs())
-        section = "Location: {} \n Welcome Message: {}\nObjects: {}\nConnecting Locations:{}\nMobs:{}\n***\n".format(name, message, obj, connectLoc, mobs)
-        with open(locationName, "w+") as file:
+        section = "Location: {}\nWelcome Message: {}\nObjects: {}\nConnecting Locations: {}\nMobs: {}\n***\n".format(name, message, obj, connectLoc, mobs)
+        with open(locationName, "a") as file:
             file.write(section)
     for person in personArray:
         name = person.getName()
@@ -166,7 +165,7 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
         defense = person.getDefense()
         inventory = ','.join(person.getInventory())
         section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\n***\n".format(name, health, attack, defense, inventory)
-        with open(personName, "w+") as file:
+        with open(personName, "a") as file:
             file.write(section)
     for mob in mobArray:
         name = mob.getName()
@@ -174,9 +173,16 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
         attack = mob.getAttack()
         defense= mob.getDefense()
         section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\n***\n".format(name, health, attack, defense)
-        with open(mobName, "w+") as file:
+        with open(mobName, "a") as file:
             file.write(section)
 
+def load():
+    global locationArray
+    global personArray
+    global mobArray
+    locationArray = initializeLocations("SaveLocation.txt")
+    personArray = initializePerson("SavePerson.txt")
+    mobArray = initializeMobs("SaveMob.txt")
 
 def initializeGame():
     global locationArray
@@ -185,19 +191,18 @@ def initializeGame():
     locationArray = initializeLocations()
     personArray = initializePerson()
     mobArray = initializeMobs()
-
-
-initializeGame()
-save()
-waiting = input("Ready?: ")
-
-for element in locationArray:
-    print(element)
-for element in personArray:
-    print(element)
-for element in mobArray:
-    print(element)
-
+#
+# initializeGame()
+# save()
+# load()
+# waiting = input("Ready?: ")
+#
+# for element in locationArray:
+#     print(element)
+# for element in personArray:
+#     print(element)
+# for element in mobArray:
+#     print(element)
 
 
 #
