@@ -149,7 +149,8 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
     global locationArray
     global personArray
     global mobArray
-    with open(locationName, "a") as file:
+    print("Saving...")
+    with open(locationName, "w+") as file:
         for location in locationArray:
             name = location.getLocation()
             message = location.getWelcomeMessage()
@@ -158,7 +159,7 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
             mobs = ','.join(location.getMobs())
             section = "Location: {}\nWelcome Message: {}\nObjects: {}\nConnecting Locations: {}\nMobs: {}\n***\n".format(name, message, obj, connectLoc, mobs)
             file.write(section)
-    with open(personName, "a") as file:
+    with open(personName, "w+") as file:
         for person in personArray:
             name = person.getName()
             health = person.getHealth()
@@ -167,7 +168,7 @@ def save(locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='
             inventory = ','.join(person.getInventory())
             section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\n***\n".format(name, health, attack, defense, inventory)
             file.write(section)
-    with open(mobName, "a") as file:
+    with open(mobName, "w+") as file:
         for mob in mobArray:
             name = mob.getName()
             health = mob.getHealth()
@@ -180,6 +181,7 @@ def load():
     global locationArray
     global personArray
     global mobArray
+    print("Loading...")
     locationArray = initializeLocations("SaveLocation.txt")
     personArray = initializePerson("SavePerson.txt")
     mobArray = initializeMobs("SaveMob.txt")
