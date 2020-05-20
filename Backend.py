@@ -10,10 +10,11 @@ from Mob import *
 class Backend():
     def __init__(self):
         self.locationArray = []
-        self.personArray = []
+        # self.personArray = []
         self.mobArray = []
         self.currentLocation = Location()
         self.currentMob = Mob()
+        self.currentPerson = Person()
 
     def initializeLocations(self, fileName='Location.txt'):
         wordsRemove = ['Location:', 'Welcome Message:', 'Objects:', 'Connecting Locations:', 'Mobs:']
@@ -52,10 +53,15 @@ class Backend():
             connectingLocations = readDataList[index + 3].strip().split(',')
             mobs = readDataList[index + 4].strip().split(',')
             locationMobs = []
+            # print(mobs)
+            # print(self.mobArray)
             for mob in self.mobArray:  # looping through mobArray type object
+                # print("first loop" + mob.getName())
                 for mobName in mobs:  # looping thru mob Name
+                    # print("second loop "+ mobName)
                     if mob.getName() == mobName:
                         locationMobs.append(mob)
+            # print(locationMobs)
             # for mob in locationMobs: #checking locationMobs is initializing correctly
             #     print(mob)
             a = Location(location, welcomeMessage, objects, connectingLocations, locationMobs)
@@ -68,7 +74,7 @@ class Backend():
     def initializePerson(self, fileName='Person.txt'):
         wordsRemove = ["Name:", "Health:", "Attack:", "Defense:", "Inventory:", "Location:", "***"]
         readDataList = []
-        persons = []
+
         personsTotal = 0
 
         try:  # checks to see if file exists or not
@@ -95,23 +101,18 @@ class Backend():
                     break
 
         index = 0
-        i = 0
+        name = readDataList[index].strip()
+        health = float(readDataList[index + 1].strip())
+        attack = float(readDataList[index + 2].strip())
+        defense = float(readDataList[index + 3].strip())
+        inventory = readDataList[index + 4].strip().split(',')
+        location = readDataList[index + 5].strip()
+        a = Person(name, health, attack, defense, inventory, location)
+        self.setCurrentLocation()
+        self.setCurrentMob()
+        self.currentPerson = a
 
-        while i < personsTotal:
-            name = readDataList[index].strip()
-            health = float(readDataList[index + 1].strip())
-            attack = float(readDataList[index + 2].strip())
-            defense = float(readDataList[index + 3].strip())
-            inventory = readDataList[index + 4].strip().split(',')
-            location = readDataList[index + 5].strip()
-            a = Person(name, health, attack, defense, inventory, location)
-            self.setCurrentLocation()
-            self.setCurrentMob()
-            persons.append(a)
-            index += 6
-            i += 1
-
-        return persons
+        return a
 
     def initializeMobs(self, fileName='Mob.txt'):
         wordsRemove = ["Name:", "Health:", "Attack:", "Defense:", "***"]
@@ -155,7 +156,8 @@ class Backend():
 
         return mobs
 
-    def save(self, locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='SaveMob.txt', currentName='Current.txt'):  # dumps all objects from the arrays into yaml files for save states
+    def save(self, locationName='SaveLocation.txt', personName='SavePerson.txt', mobName='SaveMob.txt',
+             currentName='SaveCurrent.txt'):  # dumps all objects from the arrays into yaml files for save states
         # self.locationArray
         # self.personArray
         # self.mobArray
@@ -169,24 +171,25 @@ class Backend():
                 message = location.getWelcomeMessage()
                 obj = ','.join(location.getObjects())
                 connectLoc = ','.join(location.getConnectingLocations())
-                mobs = []
+                mobArray = []
                 for mob in location.getMobs():
-                    mobs.append(mob.getName())
-                mobs = ",".join(mobs)
-                section = "Location: {}\nWelcome Message: {}\nObjects: {}\nConnecting Locations: {}\nMobs: {}\n***\n".format(
-                    name, message, obj, connectLoc, mobs)
+                    if mob.isAlive():
+                        mobArray.append(mob.getName())
+                print(mobArray)
+                mobs = ",".join(mobArray)
+                print(mobs)
+                section = "Location: {}\nWelcome Message: {}\nObjects: {}\nConnecting Locations: {}\nMobs: {}\n***\n".format(name, message, obj, connectLoc, mobs)
                 file.write(section)
         with open(personName, "w+") as file:
-            for person in self.personArray:
-                name = person.getName()
-                health = person.getHealth()
-                attack = person.getAttack()
-                defense = person.getDefense()
-                inventory = ','.join(person.getInventory())
-                location = person.getLocation()
-                section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\nLocation: {}\n***\n".format(
-                    name, health, attack, defense, inventory, location)
-                file.write(section)
+            name = self.currentPerson.getName()
+            health = self.currentPerson.getHealth()
+            attack = self.currentPerson.getAttack()
+            defense = self.currentPerson.getDefense()
+            inventory = ','.join(self.currentPerson.getInventory())
+            location = self.currentPerson.getLocation()
+            section = "Name: {}\nHealth: {}\nAttack: {}\nDefense: {}\nInventory: {}\nLocation: {}\n***\n".format(
+                name, health, attack, defense, inventory, location)
+            file.write(section)
         with open(mobName, "w+") as file:
             for mob in self.mobArray:
                 name = mob.getName()
@@ -198,22 +201,21 @@ class Backend():
         with open(currentName, "w+") as file:
             locname = self.getCurrentLocation().getName()
             mobname = self.getCurrentMob().getName()
-            print(locname)
-            print(mobname)
+            # print(locname)
+            # print(mobname)
             section = "Location: {}\nMobs: {}\n***\n".format(locname, mobname)
             file.write(section)
 
-    def load(self, currentName='Current.txt'):
+    def load(self, currentName='SaveCurrent.txt'):
         wordsRemove = ['Location:', 'Mobs:']
         self.locationArray = []
-        self.personArray = []
+        # self.personArray = []
         self.mobArray = []
         readDataList = []
-        currentLocationName =  ''
         print("Loading...")
+        self.mobArray = self.initializeMobs("Mob.txt")
         self.locationArray = self.initializeLocations("SaveLocation.txt")
-        self.personArray = self.initializePerson("SavePerson.txt")
-        self.mobArray = self.initializeMobs("SaveMob.txt")
+        self.currentPerson = self.initializePerson("SavePerson.txt")
         with open(currentName, "r") as file:
             for line in file:
                 readDataList.append(line.replace('\n', '').strip())
@@ -221,27 +223,32 @@ class Backend():
                 readDataList):  # check total location and cleaning up the location syntax before stuffing into array
             for word in wordsRemove:
                 if word in element:
-                    readDataList[index] = element.replace(word, '')
+                    readDataList[index] = element.replace(word, '').strip()
                     break
         currentLocationName = readDataList[0]
+        currentMobName = readDataList[1]
         for location in self.getLocationArray():
             if location.getName() == currentLocationName:
                 self.currentLocation = location
-
+        # print('currentMobname' +currentMobName)
+        for mob in self.getMobArray():
+            # print(mob.getName())
+            if mob.getName() == currentMobName:
+                self.currentMob = mob
 
     def initializeGame(self):
         self.locationArray = []
-        self.personArray = []
+        # self.personArray = []
         self.mobArray = []
         self.mobArray = self.initializeMobs()
         self.locationArray = self.initializeLocations()
-        self.personArray = self.initializePerson()
+        self.currentPerson = self.initializePerson()
 
     def getLocationArray(self):
         return self.locationArray
 
-    def getPersonArray(self):
-        return self.personArray
+    def getPerson(self):
+        return self.currentPerson
 
     def getMobArray(self):
         return self.mobArray
@@ -250,11 +257,8 @@ class Backend():
         return self.currentLocation
 
     def setCurrentLocation(self, locationName=''):
-        person = Person()
-        for obPerson in self.personArray:
-            person = obPerson
         for loc in self.locationArray:
-            if  person.getLocation()==  loc.getName():
+            if self.currentPerson.getLocation() == loc.getName():
                 self.currentLocation = loc
         return None
 
@@ -268,4 +272,18 @@ class Backend():
             if mobName == mob.getName():
                 self.mob = mob
                 break
-        return None
+        return self.currentMob
+
+    def moveTo(self):
+        # print(self.getCurrentLocation().getConnectingLocations())
+        nextLoc = self.currentLocation.getConnectingLocations()[0]
+
+        for loc in self.getLocationArray():
+            # print(loc)
+            if nextLoc == loc.getName():
+                # print(loc.getMobs())
+                self.mobs = loc.getMobs()
+                self.currentMob = self.mobs[0]
+                self.currentLocation = loc
+                self.currentPerson.setLocation(nextLoc)
+                return None

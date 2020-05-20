@@ -1,6 +1,6 @@
 class Mob():
 
-    def __init__(self, name = '', health = 0.0, attack = 0.0, defense = 0.0):
+    def __init__(self, name='No Mob', health=0.0, attack=0.0, defense=0.0):
         self.name = name
         self.health = health
         self.attack = attack
@@ -21,3 +21,11 @@ class Mob():
     def getDefense(self):
         return self.defense
 
+    def damage(self, dmg):
+        self.health -= dmg
+        if self.health < 0:
+            self.health = 0.0
+        return None
+
+    def isAlive(self):
+        return self.health > 0.0

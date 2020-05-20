@@ -3,3 +3,8 @@ Health: 20.0
 Attack: 1.0
 Defense: 1.0
 ***
+Name: Shaman
+Health: 10.0
+Attack: 3.0
+Defense: 2.0
+***

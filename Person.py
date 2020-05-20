@@ -7,6 +7,7 @@ class Person():
         self.defense = defense
         self.inventory = inventory
         self.location = location
+        self.maxHealth = 100
 
     def __str__(self):
         return "{}||{}||{}||{}||{}".format(self.name, self.health, self.attack, self.defense, self.inventory)
@@ -16,6 +17,10 @@ class Person():
 
     def getHealth(self):
         return self.health
+
+    def damage(self, dmg):
+        self.health -= dmg
+        return None
 
     def getAttack(self):
         return self.attack
@@ -29,12 +34,17 @@ class Person():
     def getLocation(self):
         return self.location
 
+    def setLocation(self, newLocation = ''):
+        self.location = newLocation
+
     def setName(self, newName):
         self.name = newName
         return None
 
     def heal(self, newHealth):
         self.health  += newHealth
+        if self.health > self.maxHealth:
+            self.health = 100.0
         return None
 
 

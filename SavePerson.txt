@@ -1,7 +1,7 @@
 Name: Bob
 Health: 20.0
-Attack: 20.0
-Defense: 30.0
+Attack: 1.0
+Defense: 5.0
 Inventory: Apple, Dagger
 Location: Ragni
 ***
