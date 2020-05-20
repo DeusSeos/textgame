@@ -243,6 +243,11 @@ class Backend():
         self.mobArray = self.initializeMobs()
         self.locationArray = self.initializeLocations()
         self.currentPerson = self.initializePerson()
+        for loc in self.locationArray:
+            if loc.getName() == self.currentPerson.getLocation():
+                self.currentLocation = loc
+        self.currentMob = self.currentLocation.getMobs()[0]
+
 
     def getLocationArray(self):
         return self.locationArray
@@ -286,4 +291,5 @@ class Backend():
                 self.currentMob = self.mobs[0]
                 self.currentLocation = loc
                 self.currentPerson.setLocation(nextLoc)
-                return None
+
+

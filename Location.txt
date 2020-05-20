@@ -2,7 +2,7 @@ Location: Troms
 Welcome Message: Welcome to Troms, the Citadel of Peace
 Objects: Tea Bag
 Connecting Locations: Ragni
-Mobs: Shaman,Shaman,Zombie
+Mobs: Shaman,Shaman
 ***
 Location: Ragni
 Welcome Message: Welcome to the City of Ragni

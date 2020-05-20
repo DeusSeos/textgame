@@ -7,7 +7,8 @@ class UI():
     def __init__(self):
         self.backend = Backend()
         self.person = self.backend.getPerson()
-        self.mobs = self.backend.getCurrentMob()
+        self.mob = self.backend.getCurrentMob()
+        self.currentLocation = self.backend.getCurrentLocation()
         self.bgColor = "RoyalBlue4" #"cyan4" #'DeepSkyBlue4'
         self.boxColor = 'gold3'
         self.window = Tk()
@@ -22,6 +23,8 @@ class UI():
 
         self.locationInfoBar = Label(self.topFrame, text= "Welcome to the World of Anima", relief = RIDGE, padx = 10, pady = 10, width = 40, bg = self.boxColor)
 
+        self.actionInfobar = Label(self.topFrame, text = "The world is filled with monsters. Vanquish evil from this World.\n Hit New Game or Load to start",  relief = RIDGE, padx = 10, pady = 10, width = 50, bg = self.boxColor)
+
         self.mobInfoBar = Label(self.middleFrame, text="", relief= RIDGE, padx=10, width=20, bg = self.boxColor)
         self.mobHealthBar = Label(self.middleFrame, text="Health: ", relief=RIDGE, padx=5, pady=3, width=20, bg = self.boxColor)
         self.mobAttackBar = Label(self.middleFrame, text="Attack: ", relief=RIDGE, padx=5, pady=3, width=20, bg = self.boxColor)
@@ -33,14 +36,15 @@ class UI():
         self.playerDefenseBar = Label(self.bottomFrame, text="Defense: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width =16, bd = 3,  bg = self.boxColor)
 
         self.MoveButton = Button(self.bottomFrame, text = "Next City", command = lambda :[self.backend.moveTo(), self.UIRefresh()] , relief = RIDGE, bd = 3, bg = self.boxColor, width = 16).grid(row = 1, column = 1)
-        self.AttackButton = Button(self.bottomFrame, text='Attack', command=lambda:[FrontEnd.attackMob(self, self.person, self.mobs), self.UIRefresh()], relief = RIDGE, width = 16, bd= 3, bg = self.boxColor).grid(row = 3, column = 1)
-        self.HealButton = Button(self.bottomFrame, text='Heal', command=lambda :[ FrontEnd.healPerson(self, Person = self.person), self.updatePlayerHealthBar()], relief=RIDGE, width=16, bd = 3,  bg=self.boxColor).grid(row=2, column=1)
+        self.AttackButton = Button(self.bottomFrame, text='Attack', command=lambda:[FrontEnd.attackSequence(self, self.person, self.mob), self.UIRefresh()], relief = RIDGE, width = 16, bd= 3, bg = self.boxColor).grid(row = 3, column = 1)
+        self.HealButton = Button(self.bottomFrame, text='Heal', command=lambda :[ FrontEnd.healSequence(self, self.person, self.mob), self.updatePlayerHealthBar()], relief=RIDGE, width=16, bd = 3,  bg=self.boxColor).grid(row=2, column=1)
 
-        self.NewGameButton = Button(self.bottomFrame, text='New Game', command= lambda:[self.backend.initializeGame(), self.UIRefresh()], relief = RIDGE, width = 16, bd = 3, bg = self.boxColor).grid(row = 1, column = 5)
+        self.NewGameButton = Button(self.bottomFrame, text='New Game', command= lambda:[FrontEnd.newGame(self, self.backend), self.UIRefresh()], relief = RIDGE, width = 16, bd = 3, bg = self.boxColor).grid(row = 1, column = 5)
         self.SaveButton = Button(self.bottomFrame, text ='Save', command= self.backend.save, relief = RIDGE, width = 16, bd =3,  bg = self.boxColor).grid(row = 2, column = 5)
         self.LoadButton = Button(self.bottomFrame, text='Load', command=lambda:[self.backend.load(), self.UIRefresh()], relief = RIDGE, width = 16, bd =3 , bg = self.boxColor).grid(row = 3, column = 5)
 
         self.locationInfoBar.grid(row = 0)
+        self.actionInfobar.grid(row = 1)
 
         self.mobInfoBar.grid(row=1)
         self.mobHealthBar.grid(row=2)
@@ -58,9 +62,17 @@ class UI():
 
         self.window.mainloop()
 
+
+    def updateActionInfoBar(self, message = 'null'):
+        if message == 'null':
+            message = self.backend.currentPerson.getName()
+            self.actionInfobar.configure(text = "{} is loitering around.".format(message))
+        self.actionInfobar.configure(text = message)
+        return None
+
     def updateLocationInfoBar(self, message = 'null'):
         if message == 'null':
-            message = self.backend.currentLocation.getWelcomeMessage()
+            message = self.backend.getCurrentLocation().getWelcomeMessage()
         self.locationInfoBar.configure(text  = message)
         return None
 
@@ -72,7 +84,7 @@ class UI():
 
     def updatePlayerHealthBar(self):
         health = self.backend.currentPerson.getHealth()
-        self.playerHealthBar.configure(text ="Health: {} ".format(health))
+        self.playerHealthBar.configure(text ="Health: {:5.2f} ".format(health))
         return None
 
     def updatePlayerDefenseBar(self):
@@ -103,16 +115,18 @@ class UI():
 
     def UIRefresh(self):
         self.person = self.backend.getPerson()
-        self.mobs = self.backend.getCurrentMob()
-        self.updateLocationInfoBar()
-        self.updateMobInfoBar()
-        self.updateMobHealthBar()
-        self.updateMobAttackBar()
+        self.mob = self.backend.getCurrentMob()
+        self.mob = self.backend.getCurrentLocation()
+
         self.updateMobDefenseBar()
         self.updatePlayerInfoBar()
         self.updatePlayerHealthBar()
         self.updatePlayerAttackBar()
         self.updatePlayerDefenseBar()
+        self.updateLocationInfoBar()
+        self.updateMobInfoBar()
+        self.updateMobHealthBar()
+        self.updateMobAttackBar()
 
 
 

@@ -1,6 +1,7 @@
 class Mob():
 
     def __init__(self, name='No Mob', health=0.0, attack=0.0, defense=0.0):
+        self.maxHealth = 150.0
         self.name = name
         self.health = health
         self.attack = attack
@@ -25,6 +26,12 @@ class Mob():
         self.health -= dmg
         if self.health < 0:
             self.health = 0.0
+        return None
+    
+    def heal(self, newHealth):
+        self.health  += newHealth
+        if self.health > self.maxHealth:
+            self.health = 100.0
         return None
 
     def isAlive(self):

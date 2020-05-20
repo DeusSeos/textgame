@@ -3,5 +3,5 @@ Health: 20.0
 Attack: 1.0
 Defense: 5.0
 Inventory: Apple, Dagger
-Location: Ragni
+Location: Troms
 ***
