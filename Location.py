@@ -24,7 +24,6 @@ class Location():
         return self.mobs
 
 
-
     def __str__(self):
         return "{}||{}||{}||{}||{}".format(self.locationName, self.welcomeMessage, self.objects, self.connectingLocations,self.mobs)
 

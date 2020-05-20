@@ -3,4 +3,5 @@ Health: 20.0
 Attack: 20.0
 Defense: 30.0
 Inventory: Apple, Hi
+Location: Ragni
 ***

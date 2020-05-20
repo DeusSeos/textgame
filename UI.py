@@ -3,10 +3,11 @@ from Backend import *
 
 
 class UI():
-
     def __init__(self):
+        self.backend = Backend()
+        self.mobs = []
         self.bgColor = 'DeepSkyBlue4'
-        self.boxColor = 'gold4'
+        self.boxColor = 'gold3'
         self.window = Tk()
         self.window.title("Anima")
         self.window.geometry("720x600")
@@ -23,15 +24,18 @@ class UI():
         self.mobAttackBar = Label(self.middleFrame, text="Attack: ", relief=RIDGE, padx=5, pady=3, width=20, bg = self.boxColor)
         self.mobDefenseBar = Label(self.middleFrame, text="Defense: ", relief=RIDGE, padx=5, pady=3, width=20, bg = self.boxColor)
 
-        self.playerInfoBar = Label(self.bottomFrame, text= "", relief=RIDGE, padx=10, bg = self.boxColor)
-        self.playerHealthBar = Label(self. bottomFrame, text ="Health: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width = 10, bg = self.boxColor)
-        self.playerAttackBar = Label(self. bottomFrame, text ="Attack: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width = 10, bg = self.boxColor)
-        self.playerDefenseBar = Label(self.bottomFrame, text="Defense: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width =10, bg = self.boxColor)
+        self.playerInfoBar = Label(self.bottomFrame, text= "", relief=RIDGE, padx=5, pady = 3, width = 16, bg = self.boxColor)
+        self.playerHealthBar = Label(self. bottomFrame, text ="Health: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width = 16,bd = 3,  bg = self.boxColor)
+        self.playerAttackBar = Label(self. bottomFrame, text ="Attack: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width = 16,bd = 3,  bg = self.boxColor)
+        self.playerDefenseBar = Label(self.bottomFrame, text="Defense: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width =16, bd = 3,  bg = self.boxColor)
 
-        self.inBox = Entry(self.bottomFrame, relief = RIDGE, bd = 2, bg = self.boxColor).grid(row = 1, column = 1)
-        self.NewGameButton = Button(self.bottomFrame, text='New Game', command= initializeGame, relief = RIDGE, width = 10, bg = self.boxColor).grid(row = 1, column = 5)
-        self.SaveButton = Button(self.bottomFrame, text ='Save', command=save, relief = RIDGE, width = 10, bg = self.boxColor).grid(row = 2, column = 5)
-        self.LoadButton = Button(self.bottomFrame, text='Load', command= load, relief = RIDGE, width = 10, bg = self.boxColor).grid(row = 3, column = 5)
+        self.inBox = Entry(self.bottomFrame, relief = RIDGE, bd = 3, bg = self.boxColor, width = 19).grid(row = 1, column = 1)
+        self.AttackButton = Button(self.bottomFrame, text='Attack', command=lambda:[self.updatePlayerInfoBar,self.updateMobInfoBar], relief = RIDGE, width = 16, bd= 3, bg = self.boxColor).grid(row = 3, column = 1)
+        self.HealButton = Button(self.bottomFrame, text='Heal', command=self.updatePlayerHealthBar, relief=RIDGE, width=16, bd = 3,  bg=self.boxColor).grid(row=2, column=1)
+
+        self.NewGameButton = Button(self.bottomFrame, text='New Game', command= lambda:[self.backend.initializeGame(), self.UILoad()], relief = RIDGE, width = 16, bd = 3, bg = self.boxColor).grid(row = 1, column = 5)
+        self.SaveButton = Button(self.bottomFrame, text ='Save', command= self.backend.save, relief = RIDGE, width = 16, bd =3,  bg = self.boxColor).grid(row = 2, column = 5)
+        self.LoadButton = Button(self.bottomFrame, text='Load', command=lambda:[self.backend.load(), self.UILoad()], relief = RIDGE, width = 16, bg = self.boxColor).grid(row = 3, column = 5)
 
         self.locationInfoBar.grid(row = 0)
 
@@ -49,6 +53,7 @@ class UI():
         self.middleFrame.pack()
         self.bottomFrame.pack(side = BOTTOM)
 
+
         self.window.mainloop()
 
     def updateLocationInfoBar(self, newText = 'null'):
@@ -57,24 +62,55 @@ class UI():
     def updatePlayerInfoBar(self, newText = 'null'):
         self.playerInfoBar.configure(text  = newText)
 
-    def updatePlayerHealthBar(self, current = 0, max = 20):
-        self.playerHealthBar.configure(text ="Health: {}/{} ".format(current, max))
+    def updatePlayerHealthBar(self, current = 0):
+        for person in self.backend.getPersonArray():
+            health = person.getHealth()
+        self.playerHealthBar.configure(text ="Health: {} ".format(health))
 
-    def updatePlayerDefenseBar(self, current = 0):
-        self.playerDefenseBar.configure(text ="Defense: {}".format(current))
+    def updatePlayerDefenseBar(self):
+        for person in self.backend.getPersonArray():
+            defense = person.getDefense()
+        self.playerDefenseBar.configure(text ="Defense: {}".format(defense))
 
-    def updatePlayerAttackBar(self, current = 0 ):
-        self.playerAttackBar.configure(text ="Attack: {}".format(current))
+    def updatePlayerAttackBar(self):
+        for person in self.backend.getPersonArray():
+            attack = person.getAttack()
+        self.playerAttackBar.configure(text ="Attack: {}".format(attack))
 
-    def updateMobInfoBar(self, newText = 'null'):
-        self.mobInfoBar.configure(text  = newText)
+    def updateMobInfoBar(self, message = ''):
+        loc = self.backend.getCurrentLocation()
+        self.mobInfoBar.configure(text = message)
 
-    def updateMobrHealthBar(self, current=0, max=20):
-        self.MobHealthBar.configure(text="Health: {}/{} ".format(current, max))
+    def updateMobHealthBar(self):
+        mobHealth = self.backend.getCurrentMob().getHealth()
+        self.MobHealthBar.configure(text="Health: {}".format(mobHealth))
 
-    def updatePlayerDefenseBar(self, current=0):
-        self.MobDefenseBar.configure(text="Defense: {}".format(current))
+    def updateMobDefenseBar(self):
+        mobDefense = self.backend.getCurrentMob().getDefense()
+        self.MobDefenseBar.configure(text="Defense: {}".format(mobDefense))
 
-    def updatePlayerAttackBar(self, current=0):
-        self.MobAttackBar.configure(text="Attack: {}".format(current))
+    def updateMobAttackBar(self):
+        mobAttack = self.backend.getCurrentMob().getAttack()
+        self.mobAttackBar.configure(text="Attack: {}".format(mobAttack))
+
+    def UILoad(self):
+        locations = self.backend.getLocationArray()
+        persons = self.backend.getPersonArray()
+        mobs = self.backend.getMobArray()
+        personLocation = ''
+
+        for person in persons:
+            self.updatePlayerInfoBar(person.getName())
+            self.updatePlayerHealthBar(person.getHealth())
+            self.updatePlayerAttackBar(person.getAttack())
+            self.updatePlayerDefenseBar(person.getDefense())
+            personLocation = person.getLocation()
+        for location in locations:
+            if location.getLocation() == personLocation:
+                self.updateLocationInfoBar(location.getWelcomeMessage())
+                mobs = location.getMobs()
+
+
+
+
 

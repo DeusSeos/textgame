@@ -2,7 +2,7 @@ Location: Troms
 Welcome Message: Welcome to Troms
 Objects: Tea Bag
 Connecting Locations: Ragni
-Mobs: Shaman,Shaman
+Mobs: 
 ***
 Location: Ragni
 Welcome Message: Welcome to the city
