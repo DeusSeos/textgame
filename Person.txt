@@ -1,7 +1,7 @@
-Name: Dominic
+Name: Bob
 Health: 20.0
 Attack:  20.0
 Defense:   30
-Inventory: Apple, Hi
+Inventory: Apple, Dagger
 Location: Ragni
 ***

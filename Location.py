@@ -8,7 +8,7 @@ class Location():
         self.connectingLocations = connectingLocations
         self.mobs = mobs
 
-    def getLocation(self):
+    def getName(self):
         return self.locationName
 
     def getWelcomeMessage(self):

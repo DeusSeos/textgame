@@ -6,7 +6,7 @@ class UI():
     def __init__(self):
         self.backend = Backend()
         self.mobs = []
-        self.bgColor = 'DeepSkyBlue4'
+        self.bgColor = "RoyalBlue4" #"cyan4" #'DeepSkyBlue4'
         self.boxColor = 'gold3'
         self.window = Tk()
         self.window.title("Anima")
@@ -17,7 +17,7 @@ class UI():
         self.middleFrame = Frame(self.window, relief = RIDGE, bg = self.bgColor)
         self.bottomFrame = Frame(self.window, relief = RIDGE, cursor = "dot", bg = self.bgColor)
 
-        self.locationInfoBar = Label(self.topFrame, text= "Welcome to the world of Anima", relief = RIDGE, padx = 10, pady = 10, width = 40, bg = self.boxColor)
+        self.locationInfoBar = Label(self.topFrame, text= "Welcome to the World of Anima", relief = RIDGE, padx = 10, pady = 10, width = 40, bg = self.boxColor)
 
         self.mobInfoBar = Label(self.middleFrame, text="", relief=RIDGE, padx=10, width=20, bg = self.boxColor)
         self.mobHealthBar = Label(self.middleFrame, text="Health: ", relief=RIDGE, padx=5, pady=3, width=20, bg = self.boxColor)
@@ -53,19 +53,26 @@ class UI():
         self.middleFrame.pack()
         self.bottomFrame.pack(side = BOTTOM)
 
-
         self.window.mainloop()
 
-    def updateLocationInfoBar(self, newText = 'null'):
-        self.locationInfoBar.configure(text  = newText)
+    def updateLocationInfoBar(self, message = 'null'):
+        if message == 'null':
+            message = self.backend.currentLocation.getWelcomeMessage()
+        self.locationInfoBar.configure(text  = message)
+        return None
 
-    def updatePlayerInfoBar(self, newText = 'null'):
-        self.playerInfoBar.configure(text  = newText)
+    def updatePlayerInfoBar(self, message = 'null'):
+        if message == 'null':
+            for person in self.backend.getPersonArray():
+                message = person.getName()
+        self.playerInfoBar.configure(text  = message)
+        return None
 
-    def updatePlayerHealthBar(self, current = 0):
+    def updatePlayerHealthBar(self):
         for person in self.backend.getPersonArray():
             health = person.getHealth()
         self.playerHealthBar.configure(text ="Health: {} ".format(health))
+        return None
 
     def updatePlayerDefenseBar(self):
         for person in self.backend.getPersonArray():
@@ -77,38 +84,35 @@ class UI():
             attack = person.getAttack()
         self.playerAttackBar.configure(text ="Attack: {}".format(attack))
 
-    def updateMobInfoBar(self, message = ''):
-        loc = self.backend.getCurrentLocation()
+    def updateMobInfoBar(self, message = 'null'):
+        if message == 'null':
+            message = self.backend.getCurrentMob().getName()
         self.mobInfoBar.configure(text = message)
 
     def updateMobHealthBar(self):
         mobHealth = self.backend.getCurrentMob().getHealth()
-        self.MobHealthBar.configure(text="Health: {}".format(mobHealth))
+        self.mobHealthBar.configure(text="Health: {}".format(mobHealth))
 
     def updateMobDefenseBar(self):
         mobDefense = self.backend.getCurrentMob().getDefense()
-        self.MobDefenseBar.configure(text="Defense: {}".format(mobDefense))
+        self.mobDefenseBar.configure(text="Defense: {}".format(mobDefense))
 
     def updateMobAttackBar(self):
         mobAttack = self.backend.getCurrentMob().getAttack()
         self.mobAttackBar.configure(text="Attack: {}".format(mobAttack))
 
     def UILoad(self):
-        locations = self.backend.getLocationArray()
-        persons = self.backend.getPersonArray()
-        mobs = self.backend.getMobArray()
-        personLocation = ''
+        self.updateLocationInfoBar()
+        self.updateMobInfoBar()
+        self.updateMobHealthBar()
+        self.updateMobAttackBar()
+        self.updateMobDefenseBar()
+        self.updatePlayerInfoBar()
+        self.updatePlayerHealthBar()
+        self.updatePlayerAttackBar()
+        self.updatePlayerDefenseBar()
 
-        for person in persons:
-            self.updatePlayerInfoBar(person.getName())
-            self.updatePlayerHealthBar(person.getHealth())
-            self.updatePlayerAttackBar(person.getAttack())
-            self.updatePlayerDefenseBar(person.getDefense())
-            personLocation = person.getLocation()
-        for location in locations:
-            if location.getLocation() == personLocation:
-                self.updateLocationInfoBar(location.getWelcomeMessage())
-                mobs = location.getMobs()
+
 
 
 
