@@ -247,6 +247,7 @@ class Backend():
             if loc.getName() == self.currentPerson.getLocation():
                 self.currentLocation = loc
         self.currentMob = self.currentLocation.getMobs()[0]
+        # print(self.currentMob)
 
 
     def getLocationArray(self):
