@@ -21,7 +21,7 @@ class UI():
         self.middleFrame = Frame(self.window, relief = RIDGE, bg = self.bgColor)
         self.bottomFrame = Frame(self.window, relief = RIDGE, cursor = "dot", bg = self.bgColor)
 
-        self.locationInfoBar = Label(self.topFrame, text= "Welcome to the World of Anima", relief = RIDGE, padx = 10, pady = 10, width = 40, bg = self.boxColor)
+        self.locationInfoBar = Label(self.topFrame, text= "Welcome to the World of Anima", relief = RIDGE, padx = 10, pady = 10, width = 80, bg = self.boxColor)
 
         self.actionInfobar = Label(self.topFrame, text = "The world is filled with monsters. Vanquish evil from this World.\n Hit New Game or Load to start",  relief = RIDGE, padx = 10, pady = 10, width = 50, bg = self.boxColor)
 

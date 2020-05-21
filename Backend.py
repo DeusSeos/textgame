@@ -59,7 +59,7 @@ class Backend():
                 # print("first loop" + mob.getName())
                 for mobName in mobs:  # looping thru mob Name
                     # print("second loop "+ mobName)
-                    if mob.getName() == mobName:
+                    if mob.getName() == mobName.strip():
                         a = Mob(mob.getName(), mob.getHealth(), mob.getAttack(), mob.getDefense())
                         locationMobs.append(a)
             # print(locationMobs)

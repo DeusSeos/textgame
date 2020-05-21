@@ -1,7 +1,7 @@
 Name: Bob
-Health: 12.399999999999965
+Health: 20.0
 Attack: 1.0
 Defense: 5.0
 Inventory: Apple, Dagger
-Location: Troms
+Location: Zideus
 ***

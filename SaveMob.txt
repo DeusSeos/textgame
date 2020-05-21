@@ -8,3 +8,53 @@ Health: 10.0
 Attack: 3.0
 Defense: 2.0
 ***
+Name: Shaman
+Health: 10.0
+Attack: 3.0
+Defense: 2.0
+***
+Name: Zombie Shaman
+Health: 10.0
+Attack: 3.0
+Defense: 1.0
+***
+Name: Necromancer
+Health: 5.0
+Attack: 5.0
+Defense: 1.0
+***
+Name: Snake
+Health: 1.0
+Attack: 2.0
+Defense: 8.0
+***
+Name: Frog
+Health: 2.0
+Attack: 1.0
+Defense: 9.0
+***
+Name: Wild Horse
+Health: 20.0
+Attack: 5.0
+Defense: 2.0
+***
+Name: Hedgehog
+Health: 3.0
+Attack: 3.0
+Defense: 2.0
+***
+Name: Leviathan
+Health: 50.0
+Attack: 3.0
+Defense: 8.0
+***
+Name: Wybel
+Health: 1.0
+Attack: 1.0
+Defense: 2.0
+***
+Name: Orange Wybel
+Health: 80.0
+Attack: 10.0
+Defense: 0.0
+***

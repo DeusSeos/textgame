@@ -14,41 +14,41 @@ Location: Cinfras
 Welcome Message: Welcome to Cinfras, the City of the Lost
 Objects: Tea Bag
 Connecting Locations: Nessak
-Mobs: Wild Horse,Shaman, Hedgehog
+Mobs: Wild Horse,Shaman,Hedgehog
 ***
 Location: Nessak
 Welcome Message: Welcome to Nessak, the icy canyons of the past
 Objects: Tea Bag
 Connecting Locations: Zeus
-Mobs: Zombie,Shaman
+Mobs: Zombie,Shaman,Shaman,Zombie Shaman
 ***
 Location: Zeus
-Welcome Message: The cries of battles gone by can still be heard here
+Welcome Message: Zeus: The cries of battles gone by can still be heard here
 Objects: Rocks
 Connecting Locations: Faith
-Mobs: Wild Horse, Wild Horse, Zombie, Zombie, Shaman
+Mobs: Wild Horse,Wild Horse,Zombie, Zombie, Shaman
 ***
 Location: Faith
-Welcome Message: A destroyed church sits on a hill
+Welcome Message: Faith: A destroyed church sits on a hill
 Objects:
 Connecting Locations: Sky Islands
 Mobs: Zombie, Zombie, Zombie, Zombie Shaman, Zombie Shaman, Necromancer
 ***
 Location: Sky Islands
-Welcome Message: Watch your step. The islands have holes in them.
+Welcome Message: Sky Islands: Watch your step. The islands have holes in them.
 Objects:
 Connecting Locations: Zideus
-Mobs:
+Mobs: Hedgehog, Frog, Snake, Zombie, Frog, Hedgehog
 ***
 Location: Zideus
-Welcome Message: The air here is still. A power pressure is exerted on you.
+Welcome Message: Zideus: The air here is still. A powerful pressure is exerted on you.
 Objects:
 Connecting Locations: Wybel Santuary
 Mobs: Zombie, Wybel, Necromancer, Leviathan
 ***
 Location: Wybel Sanctuary
-Welcome Message: Soft fluffy creatures roam around.
-Objects
+Welcome Message: Wybel Sanctuary: Soft fluffy creatures roam around.
+Objects:
 Connecting Locations:
 Mobs: Wybel, Wybel, Wybel, Wybel, Orange Wybel, Wybel
 ***
