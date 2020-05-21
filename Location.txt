@@ -1,12 +1,54 @@
-Location: Troms
-Welcome Message: Welcome to Troms, the Citadel of Peace
-Objects: Tea Bag
-Connecting Locations: Ragni
-Mobs: Shaman,Shaman
-***
 Location: Ragni
 Welcome Message: Welcome to the City of Ragni
 Objects: Dagger
 Connecting Locations: Troms
-Mobs: Zombie,Zombie
+Mobs: Zombie,Zombie,Frog
+***
+Location: Troms
+Welcome Message: Welcome to Troms, the Citadel of Peace
+Objects: Tea Bag
+Connecting Locations: Cinfras
+Mobs: Shaman,Shaman,Snake
+***
+Location: Cinfras
+Welcome Message: Welcome to Cinfras, the City of the Lost
+Objects: Tea Bag
+Connecting Locations: Nessak
+Mobs: Wild Horse,Shaman, Hedgehog
+***
+Location: Nessak
+Welcome Message: Welcome to Nessak, the icy canyons of the past
+Objects: Tea Bag
+Connecting Locations: Zeus
+Mobs: Zombie,Shaman
+***
+Location: Zeus
+Welcome Message: The cries of battles gone by can still be heard here
+Objects: Rocks
+Connecting Locations: Faith
+Mobs: Wild Horse, Wild Horse, Zombie, Zombie, Shaman
+***
+Location: Faith
+Welcome Message: A destroyed church sits on a hill
+Objects:
+Connecting Locations: Sky Islands
+Mobs: Zombie, Zombie, Zombie, Zombie Shaman, Zombie Shaman, Necromancer
+***
+Location: Sky Islands
+Welcome Message: Watch your step. The islands have holes in them.
+Objects:
+Connecting Locations: Zideus
+Mobs:
+***
+Location: Zideus
+Welcome Message: The air here is still. A power pressure is exerted on you.
+Objects:
+Connecting Locations: Wybel Santuary
+Mobs: Zombie, Wybel, Necromancer, Leviathan
+***
+Location: Wybel Sanctuary
+Welcome Message: Soft fluffy creatures roam around.
+Objects
+Connecting Locations:
+Mobs: Wybel, Wybel, Wybel, Wybel, Orange Wybel, Wybel
 ***

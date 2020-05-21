@@ -36,7 +36,7 @@ class UI():
         self.playerDefenseBar = Label(self.bottomFrame, text="Defense: ", relief = RIDGE, padx = 5, pady = 3, anchor = W, width =16, bd = 3,  bg = self.boxColor)
 
         self.MoveButton = Button(self.bottomFrame, text = "Next City", command = lambda :[self.backend.moveTo(), self.UIRefresh()] , relief = RIDGE, bd = 3, bg = self.boxColor, width = 16).grid(row = 1, column = 1)
-        self.AttackButton = Button(self.bottomFrame, text='Attack', command=lambda:[FrontEnd.attackSequence(self, self.person, self.currentMob), self.UIRefresh()], relief = RIDGE, width = 16, bd= 3, bg = self.boxColor).grid(row = 3, column = 1)
+        self.AttackButton = Button(self.bottomFrame, text='Attack', command=lambda:[FrontEnd.attackSequence(self, self.person, self.currentMob, self.currentLocation, self.backend), self.UIRefresh()], relief = RIDGE, width = 16, bd= 3, bg = self.boxColor).grid(row = 3, column = 1)
         self.HealButton = Button(self.bottomFrame, text='Heal', command=lambda :[FrontEnd.healSequence(self, self.person, self.currentMob), self.updatePlayerHealthBar()], relief=RIDGE, width=16, bd = 3, bg=self.boxColor).grid(row=2, column=1)
 
         self.NewGameButton = Button(self.bottomFrame, text='New Game', command= lambda:[FrontEnd.newGame(self, self.backend), self.UIRefresh()], relief = RIDGE, width = 16, bd = 3, bg = self.boxColor).grid(row = 1, column = 5)
@@ -115,8 +115,9 @@ class UI():
 
     def UIRefresh(self):
         self.person = self.backend.getPerson()
-        self.currentMob = self.backend.getCurrentMob()
         self.currentLocation = self.backend.getCurrentLocation()
+        self.currentMob = self.backend.getCurrentMob()
+
 
         self.updateMobDefenseBar()
         self.updatePlayerInfoBar()

@@ -60,7 +60,8 @@ class Backend():
                 for mobName in mobs:  # looping thru mob Name
                     # print("second loop "+ mobName)
                     if mob.getName() == mobName:
-                        locationMobs.append(mob)
+                        a = Mob(mob.getName(), mob.getHealth(), mob.getAttack(), mob.getDefense())
+                        locationMobs.append(a)
             # print(locationMobs)
             # for mob in locationMobs: #checking locationMobs is initializing correctly
             #     print(mob)
@@ -276,21 +277,26 @@ class Backend():
         mobs = loc.getMobs()
         for mob in mobs:
             if mobName == mob.getName():
-                self.mob = mob
+                self.currentMob = mob
                 break
+        try:
+            self.currentMob = self.getCurrentLocation().getMobs()[0]
+        except:
+            self.currentMob = Mob()
         return self.currentMob
 
     def moveTo(self):
-        # print(self.getCurrentLocation().getConnectingLocations())
+        print(self.getCurrentLocation().getConnectingLocations())
         nextLoc = self.currentLocation.getConnectingLocations()[0]
 
         for loc in self.getLocationArray():
             # print(loc)
             if nextLoc == loc.getName():
-                # print(loc.getMobs())
+                print(loc.getMobs())
                 self.mobs = loc.getMobs()
-                self.currentMob = self.mobs[0]
+
                 self.currentLocation = loc
+                self.currentMob = self.setCurrentMob()
                 self.currentPerson.setLocation(nextLoc)
 
 

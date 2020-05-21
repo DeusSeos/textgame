@@ -1,5 +1,5 @@
 Name: Bob
-Health: 20.0
+Health: 12.399999999999965
 Attack: 1.0
 Defense: 5.0
 Inventory: Apple, Dagger

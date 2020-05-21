@@ -41,6 +41,12 @@ class Person():
         self.name = newName
         return None
 
+    def increaseAttack(self, attackUp = 1):
+        self.attack = self.getAttack() + attackUp
+
+    def increaseDefense(self, defenseUp = .5):
+        self.defense = self.getDefense() + defenseUp
+
     def heal(self, newHealth):
         self.health  += newHealth
         if self.health > self.maxHealth:

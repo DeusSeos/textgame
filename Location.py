@@ -23,6 +23,9 @@ class Location():
     def getMobs(self):
         return self.mobs
 
+    def removeMob(self, mob):
+        self.mobs.remove(mob)
+
 
     def __str__(self):
         return "{}||{}||{}||{}||{}".format(self.locationName, self.welcomeMessage, self.objects, self.connectingLocations,self.mobs)

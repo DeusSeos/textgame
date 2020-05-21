@@ -22,20 +22,35 @@ class FrontEnd():
     def healPerson(self, Person, hr = 2):
          Person.heal(hr)
          return hr
+
     def healMob(self, Mob, hr = 1):
         Mob.heal(hr)
         return hr
 
-    def attackSequence(self, Person, Mob):
-        dmg = FrontEnd.attackMob(self, Person, Mob)
-        mobName = Mob.getName()
-        if random.randrange(0, 10) > 7:
-            mobAction = 'healed'
-            mobI = FrontEnd.healMob(self, Mob = Mob)
+    def attackSequence(self, Person, Mob, Location, Backend):
+        if Mob.isAlive():
+            dmg = FrontEnd.attackMob(self, Person, Mob)
+            mobName = Mob.getName()
+            if random.randrange(0, 10) > 7:
+                mobAction = 'healed'
+                mobI = FrontEnd.healMob(self, Mob = Mob)
+            else:
+                mobAction = "attacked"
+                mobI = FrontEnd.attackPerson(self, Person, Mob)
+            message = "You have attacked {} for {} damage.\n{} has {} for {}".format(mobName, dmg, mobName, mobAction,mobI)
         else:
-            mobAction = "attacked"
-            mobI = FrontEnd.attackPerson(self, Person, Mob)
-        message = "You have attacked {} for {} damage.\n{} has {} for {}".format(mobName, dmg, mobName, mobAction,mobI)
+            if (Location.getMobs() != []):
+                message = "You have killed a {}".format(Mob.getName())
+                print(Location.getMobs())
+                Location.removeMob(Mob)
+                Backend.setCurrentMob()
+                if (Location.getMobs() == []):
+                    Person.increaseAttack()
+                    Person.increaseDefense()
+                    message = "You have freed this city.\nYour attack has gone up by 1!\nYour defense has gone up by .5!"
+            else:
+                message = "Let's move on to the next city."
+
         self.updateActionInfoBar(message)
 
     def healSequence(self, Person, Mob):
